@@ -63,7 +63,9 @@ public class CrimeListFragment extends ListFragment{
         if(item.getItemId() == R.id.menu_item_new_crime){
             Crime crime = new Crime();
             CrimeLab.get(getActivity()).addCrime(crime);
-
+            Intent i = new Intent(getActivity(), CrimePagerActivity.class);
+            i.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getID());
+            startActivityForResult(i, 0);
             return true;
         }
         else {
