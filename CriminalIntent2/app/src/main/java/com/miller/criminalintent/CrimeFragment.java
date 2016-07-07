@@ -1,7 +1,9 @@
 package com.miller.criminalintent;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -40,6 +42,7 @@ public class CrimeFragment extends Fragment {
         return fragment;
     }
 
+    @TargetApi(11)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,10 @@ public class CrimeFragment extends Fragment {
         // fragment arguments
         UUID crimeID = (UUID)getArguments().getSerializable(EXTRA_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeID);
+
+        if(Build.VERSION.){
+
+        }
     }
 
     public CrimeFragment() {
