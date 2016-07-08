@@ -1,8 +1,11 @@
 package com.miller.criminalintent;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -58,6 +61,7 @@ public class CrimeListFragment extends ListFragment{
         inflater.inflate(R.menu.fragment_crime_list, menu);
     }
 
+    @TargetApi(11)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.menu_item_new_crime){
@@ -66,6 +70,19 @@ public class CrimeListFragment extends ListFragment{
             Intent i = new Intent(getActivity(), CrimePagerActivity.class);
             i.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getID());
             startActivityForResult(i, 0);
+            return true;
+        }
+        else if(item.getItemId() == R.id.menu_item_show_subtitle){
+
+            ActionBar bar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+            if(bar.getSubtitle() == null){
+                bar.setSubtitle(R.string.subtitle);
+                item.setTitle(R.string.hide_subtitle);
+            }
+            else {
+                bar.setSubtitle(null);
+                item.setTitle(R.string.show_subtitle);
+            }
             return true;
         }
         else {
