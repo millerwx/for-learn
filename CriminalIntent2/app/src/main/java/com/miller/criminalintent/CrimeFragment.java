@@ -67,6 +67,11 @@ public class CrimeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        CrimeLab.get(getActivity()).saveCrimes();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

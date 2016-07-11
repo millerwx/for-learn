@@ -39,6 +39,16 @@ public class Crime {
         this.mDate = new Date();
     }
 
+    public Crime(JSONObject json) throws JSONException{
+        mID = UUID.fromString(json.getString(JSON_ID));
+        if(json.has(JSON_TITLE)){
+            mTitle = json.getString(JSON_TITLE);
+        }
+        mSolved = json.getBoolean(JSON_SOLVED);
+        mDate = new Date(json.getLong(JSON_DATE));
+
+    }
+
     public JSONObject toJson() throws JSONException {
         JSONObject json = new JSONObject();
         json.put(JSON_ID, mID.toString());

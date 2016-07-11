@@ -4,7 +4,13 @@ import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -22,6 +28,27 @@ public class CriminalIntentJSONSerializer {
         this.mContext = mContext;
         this.mFileName = mFileName;
     }
+
+    public ArrayList<Crime> loadCrime() throws IOException, JSONException {
+        ArrayList<Crime> crimes = new ArrayList<Crime>();
+        BufferedReader reader = null;
+        try {
+            InputStream in = mContext.openFileInput(mFileName);
+            reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder jsonString = new StringBuilder();
+            String line = null;
+            
+
+        }
+        catch (FileNotFoundException e) {
+
+        }
+        finally {
+
+        }
+        return crimes;
+    }
+
 
     public void saveCrimes(ArrayList<Crime> crimes){
         try{
