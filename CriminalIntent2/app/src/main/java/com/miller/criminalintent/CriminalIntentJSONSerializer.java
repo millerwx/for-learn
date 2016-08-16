@@ -5,6 +5,7 @@ import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -37,13 +38,24 @@ public class CriminalIntentJSONSerializer {
             reader = new BufferedReader(new InputStreamReader(in));
             StringBuilder jsonString = new StringBuilder();
             String line = null;
-            
+            while ((line = reader.readLine()) != null) {
+                jsonString.append(line);
+            }
 
+            // parse the JSON
+            JSONArray array = (JSONArray)new JSONTokener(jsonString.toString()).nextValue();
+
+            for(int i=0; i< array.length();i++) {
+                crimes.add(new Crime(array.getJSONObject(i)));
+            }
         }
         catch (FileNotFoundException e) {
 
         }
         finally {
+            if(reader != null) {
+                reader.close();
+            }
 
         }
         return crimes;
